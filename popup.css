@@ -1,0 +1,133 @@
+
+
+:root{
+    --primary-color-1: #;
+    --primary-color: #ddd;
+    --primary-color-2: #eee;
+    --primary-color-3: #fff;
+    --secondary-color: #000011;
+    --secondary-color-2: #000004;;
+    --text-color: #000;
+    --hover-color: #56e632;
+}
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    color: var(--text-color);
+    user-select: none;
+    font-family:monospace;
+}
+*[hidden]{
+    display: none !important;
+}
+div[active]{
+    background-color: var(--primary-color);
+}
+body {
+    width: 300px;
+    height: 500px;
+    background-color: var(--primary-color-2);
+    display: flex;
+    flex-direction: column;
+}
+img{
+    height: 100%;
+    
+}
+
+.main-title{
+    font-size: 6em;
+font-weight: bolder;
+width: 100%;
+height: 100%;
+vertical-align: center;
+}
+section-header{
+    flex: 20% 1 1;
+}
+
+section-main{
+    flex: 70% 1 1 ;
+}
+
+section-footer{
+    flex: 10% 1 1;
+}
+
+#navbar{
+    display: flex;
+}
+#navbar div{
+    width: 100%;
+    border-radius: 100px 100px 0px 0px;
+    font-size: 2em;
+    cursor: pointer;
+}
+#navbar div:hover{
+    background-color: var(--primary-color) ;
+}
+#navbar div.active{
+    background-color: var(--primary-color);
+}
+.nav-section{
+    background-color: var(--primary-color);    
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+}
+
+.nav-sub-section{
+    height: 100%;
+    overflow-y: auto;
+}
+#target-img{
+    width: 50%;
+    align-self: center;
+    vertical-align: center;
+}
+.nav-sub-title{
+    font-size: 1.5em;
+    font-weight: bold;
+    
+    border-bottom: 2px solid var(--primary-color-2);
+    border-radius: 100px;
+}
+.nav-sub-desc{
+    display: flex;
+}
+.nav-sub-desc-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.nav-sub-desc-info > div{
+    height: 50%;
+}
+.nav-sub-desc-info-txt{
+    flex: 100%;
+}
+button{
+    cursor: pointer;
+    background-color: var(--hover-color);
+    color: var(--text-color);
+    padding: 0.5em;
+    margin: auto;
+}
+#target-username{
+    font-size: 1.5em;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  user-select: none;
+  pointer-events: none;
+}
+
+button:hover{
+    background-color: var(--secondary-color);
+    color: var(--primary-color-3);
+}
