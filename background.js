@@ -1,4 +1,7 @@
 console.log("Backgroud.js")
+
+import lol from "./module.js"
+console.log(lol)
 //CLASS
 class FileManager {
   constructor() {
