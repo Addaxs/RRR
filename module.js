@@ -3,6 +3,7 @@
 
 export default function background() {
     //CLASS
+    console.log("Updated module script.")
 class FileManager {
     constructor() {
       console.log("File manager constructed.")
