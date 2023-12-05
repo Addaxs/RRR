@@ -1,4 +1,7 @@
-console.log("Content.js")
+
+
+export default function content(){
+    
 async function sendToBackground(data) {
     const response = await chrome.runtime.sendMessage(data);
     return response
@@ -53,4 +56,6 @@ document.onkeydown = (e) => {
         currDomInputTargets[targetInputName] = e.target.value;
         if (e.key == "Enter") onEntered();
     }
+}
+
 }

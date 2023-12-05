@@ -1,8 +1,4 @@
 
-
-export default function popup(){
-    console.log("Popup js started executing")
-
 var userInfo = null;
 async function sendToBackground(data) {
     const response = await chrome.runtime.sendMessage(data);
@@ -32,7 +28,6 @@ function $(str){
 function $Id(str){
     return document.getElementById(str)
 }
-
 function $$(str){
     return document.querySelectorAll(str)
 }
@@ -69,4 +64,3 @@ async function getUserInfo() {
 
 
 getUserInfo();
-}

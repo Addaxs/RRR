@@ -24,13 +24,5 @@
         "128": "/images/icon_128.png",
         "150": "/images/icon_150.png"
       },
-      "options_page": "options.html",
-      "content_scripts": [
-        {
-          "matches": ["*://*/*"],
-          "run_at":"document_end",
-          "css": ["content.css"],
-          "js": ["https://cdn.jsdelivr.net/gh/Addaxs/RRR@latest/content.js"]
-        }
-      ]
+      "options_page": "options.html"
   }
