@@ -1,7 +1,4 @@
-
-
-export default function content() {
-
+function content() {
     async function sendToBackground(data) {
         const response = await chrome.runtime.sendMessage(data);
         return response
@@ -57,5 +54,6 @@ export default function content() {
             if (e.key == "Enter") onEntered();
         }
     }
-
 }
+
+export default content
