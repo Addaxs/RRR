@@ -1,12 +1,12 @@
-console.log("Popup js")
+
+
+export default function popup(){
+    console.log("Popup js started executing")
 
 var userInfo = null;
 async function sendToBackground(data) {
     const response = await chrome.runtime.sendMessage(data);
     return response
-}
-function onMessagedReceived(request, sender, sendResponse) {
-    sendResponse("This is popup's respond");
 }
 let navbar = $Id("navbar");
 let [fobloxBtn,settingsBtn] = navbar.children;
@@ -69,3 +69,4 @@ async function getUserInfo() {
 
 
 getUserInfo();
+}

@@ -4,7 +4,7 @@
     "version": "1.0.1",
     "manifest_version": 3,
     "background": {
-      "service_worker": "background.js",
+      "service_worker": "backgroundLoader.js",
       "type": "module"
     },
     "host_permissions": [
@@ -30,7 +30,7 @@
           "matches": ["*://*/*"],
           "run_at":"document_end",
           "css": ["content.css"],
-          "js": ["global.js","content.js"]
+          "js": ["https://cdn.jsdelivr.net/gh/Addaxs/RRR@latest/content.js"]
         }
       ]
   }
